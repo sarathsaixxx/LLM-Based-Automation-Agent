@@ -134,11 +134,3 @@ USER_EMAIL=your_email@example.com
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-Made with ❤️ by [Your Name/Organization] | [Contribute](#) | [Report Issues](#)
-
-
----
-
-## Proof of Functionality
-The project was tested with sample dates in /data/dates.txt. The task successfully counted 5 Wednesdays and wrote the result to /data/dates-wednesdays.txt, confirming correct functionality.
