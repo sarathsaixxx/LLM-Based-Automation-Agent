@@ -30,9 +30,13 @@ An AI-powered data analysis assistant that can:
 ```
 
 ├── app.py
+
 ├── index.html
+
 ├── requirements.txt
+
 ├── .env
+
 └── README.md
 
 ````
