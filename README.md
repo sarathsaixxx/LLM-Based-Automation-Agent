@@ -1,127 +1,293 @@
-Here’s a clean, production-ready README.md for your project. You can directly paste this into your repo.
 
-⚡ Data Analyst Agent (TDS Project 2)
 
-An AI-powered data analysis system using FastAPI + LangChain + Google Gemini that can:
+```md
+# ⚡ Data Analyst Agent (FastAPI + Gemini + LangChain)
 
-Analyze datasets (CSV, Excel, JSON, Parquet)
-Scrape web data automatically
-Generate Python-based insights
-Produce charts (returned as base64 images)
-Answer multiple analytical questions in one request
-🚀 Features
-🤖 AI-powered data analysis using Google Gemini
-📊 Automatic EDA (correlations, trends, summaries)
-🌐 Web scraping fallback when dataset is not provided
-📈 Visualization support (Matplotlib + Seaborn)
-⚡ FastAPI backend with async processing
-🧠 LangChain tool-calling agent
-🖼 Base64 image generation for plots (<100KB optimized)
-📂 Project Structure
-app.py              # Main FastAPI backend
-index.html          # Frontend UI
-requirements.txt    # Python dependencies
-.env                # API keys (NOT committed)
-⚙️ Installation Guide
-1️⃣ Clone the repository
-git clone https://github.com/22f1001281/tds-project2.git
+An AI-powered data analysis assistant that can:
+- Answer natural language questions on datasets
+- Scrape web data from URLs
+- Generate Python code automatically via LLM (Google Gemini)
+- Produce visualizations (Matplotlib/Seaborn)
+- Return structured JSON outputs via API
+
+---
+
+## 🚀 Features
+
+- 🤖 Gemini AI-powered code generation
+- 📊 Automatic data analysis (Pandas/Numpy)
+- 🌐 Web scraping tool (URL → DataFrame)
+- 📈 Plot generation (Base64 images <100KB)
+- ⚙️ FastAPI backend
+- 🧠 LangChain agent orchestration
+- 📂 Supports CSV, Excel, JSON, Parquet
+- 🖼 Image input support (optional)
+
+---
+
+## 📁 Project Structure
+
+```
+
+.
+├── app.py
+├── index.html
+├── requirements.txt
+├── .env
+└── README.md
+
+````
+
+---
+
+## 🧰 Requirements
+
+- Python 3.10+
+- pip
+- virtualenv (recommended)
+- Linux / WSL / macOS / Windows
+
+---
+
+## 🔑 Setup Instructions
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/<your-username>/tds-project2.git
 cd tds-project2
-2️⃣ Create virtual environment
-python3 -m venv venv
-source venv/bin/activate   # Linux / WSL
+````
+
+---
+
+### 2. Create Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Linux / Mac
+# OR
 venv\Scripts\activate      # Windows
-3️⃣ Install dependencies
+```
+
+---
+
+### 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
-4️⃣ Setup environment variables
+```
 
-Create a .env file in the root directory:
+---
 
-GEMINI_API_KEY=your_google_gemini_api_key
+### 4. Set Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GEMINI_API_KEY=your_google_gemini_api_key_here
 LLM_TIMEOUT_SECONDS=240
-5️⃣ Run the server
-python -m uvicorn app:app --host 0.0.0.0 --port 8000 --reload
-6️⃣ Open in browser
-http://127.0.0.1:8000
-📥 API Endpoints
-🟢 GET /
-Loads frontend UI
-🟡 POST /api
+```
 
-Upload dataset + questions file
+👉 Get API key from:
+[https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 
-Form Data:
+---
 
-questions_file → required (.txt)
-data_file → optional (csv/xlsx/json/parquet)
+## ▶️ Run the Server
 
-Response:
+### Option 1 (Recommended)
 
+```bash
+uvicorn app:app --reload
+```
+
+### Option 2 (Explicit host)
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+```
+
+---
+
+## 🌐 Open in Browser
+
+```
+http://127.0.0.1:8000/
+```
+
+---
+
+## 📡 API Endpoints
+
+### 1. Frontend
+
+```
+GET /
+```
+
+---
+
+### 2. Analysis API (Main)
+
+```
+POST /api
+```
+
+### Input:
+
+* `questions_file` → required (.txt file)
+* `data_file` → optional dataset file
+
+### Output:
+
+```json
 {
   "Question 1": "Answer",
   "Question 2": "Answer"
 }
-🔵 GET /summary
+```
 
-System diagnostics (LLM, network, system health)
+---
 
-📊 Supported File Formats
-Type	Extensions
-CSV	.csv
-Excel	.xlsx, .xls
-JSON	.json
-Parquet	.parquet
-Text	.txt
-🧠 How It Works
-User uploads dataset + questions
-FastAPI receives request
-LangChain agent:
-Decides whether to use dataset or web scraping
-Python code is generated dynamically
-Code is executed in sandbox
-Results returned as JSON
-🌐 Web Scraping Mode
+### 3. Health Check
 
-If no dataset is provided:
+```
+GET /api
+```
 
-Agent automatically calls scrape_url_to_dataframe()
-Extracts tables or text from web pages
-Converts into DataFrame for analysis
-📈 Visualization System
+---
 
-All plots:
+### 4. Diagnostics
 
-Generated using Matplotlib/Seaborn
-Converted to Base64 images
-Automatically compressed to <100KB
-🔐 Security Notes
-API keys stored in .env
-No external storage of uploaded files
-Execution happens locally
-Temporary files auto-deleted
-🧪 Example Questions
-What is the correlation between Sales and Profit?
-Which region has highest revenue?
-Plot sales distribution
-Find missing values in dataset
-Show trend over time
-🛠 Tech Stack
-FastAPI ⚡
-LangChain 🧠
-Google Gemini 🤖
-Pandas / NumPy 📊
-Matplotlib / Seaborn 🎨
-Python 3.10+
-🚀 Run Troubleshooting
-❌ Port already in use
-pkill -f uvicorn
-❌ No API key error
+```
+GET /summary
+```
+
+Shows:
+
+* System info
+* Network status
+* LLM key checks
+* Package info
+
+---
+
+## 📂 Supported File Types
+
+### Dataset Upload
+
+* CSV `.csv`
+* Excel `.xlsx`, `.xls`
+* JSON `.json`
+* Parquet `.parquet`
+* Images `.png`, `.jpg` (optional)
+
+### Questions File
+
+* Plain text `.txt`
+
+---
+
+## 🧠 How It Works
+
+1. User uploads:
+
+   * dataset (optional)
+   * question file (required)
+
+2. LLM (Gemini) generates Python code:
+
+   * Uses Pandas / NumPy
+   * Optionally scrapes web data
+
+3. Code executed safely in sandbox
+
+4. Results returned as JSON
+
+---
+
+## 🔐 Environment Variables
+
+| Variable            | Description           |
+| ------------------- | --------------------- |
+| GEMINI_API_KEY      | Google Gemini API key |
+| LLM_TIMEOUT_SECONDS | Execution timeout     |
+
+---
+
+## 🛠 Troubleshooting
+
+### ❌ Port already in use
+
+```bash
+lsof -i :8000
+kill -9 <PID>
+```
+
+---
+
+### ❌ No Gemini API Key error
+
+```bash
 export GEMINI_API_KEY="your_key"
-❌ Module not found
-pip install -r requirements.txt
-📜 License
+```
 
-MIT License © 2026
+---
 
-👨‍💻 Author
+### ❌ App not opening in browser
 
-Built for TDS Project 2
+Use:
+
+```
+http://127.0.0.1:8000
+```
+
+NOT localhost if WSL/network blocks it.
+
+---
+
+### ❌ Uvicorn keeps stopping
+
+Make sure no old process is running:
+
+```bash
+ps aux | grep uvicorn
+kill -9 <PID>
+```
+
+---
+
+## 📊 Example Questions File
+
+```txt
+What is the average value of column A?
+Which category has the highest sales?
+Plot correlation between X and Y
+Find missing values percentage
+```
+
+---
+
+## 🎯 Example Dataset Ideas
+
+You can use:
+
+* Titanic dataset
+* Sales dataset (CSV)
+* Netflix titles dataset
+* Weather data
+* Any Kaggle dataset
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## 👨‍💻 Author
+
+Built with FastAPI + LangChain + Google Gemini
+
+```
